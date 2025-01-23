@@ -5,7 +5,7 @@ import App from './App';
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Prodect from './components/Prodect/Prodect';
 import ReadData from './components/Prodect/ReadData';
-import User from './components/Prodect/User';
+import User from './pages/user/UserPage';
 import { ToastContainer } from 'react-toastify';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
