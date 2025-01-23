@@ -4,14 +4,15 @@ const Bcrypt = require("bcrypt");
 const Jwt = require("jsonwebtoken");
 const Schema_Page = require("./Schema/Schema");
 const cors = require("cors")
-const dotenv = require("dotenv")
+const dotenv = require("dotenv");
+const router = require("./Router/router");
 dotenv.config()
 
 const App = Express();
 
 App.use(cors())
 App.use(Express.json());
-
+App.use("/route", router)
 
 Mongoose.connect(process.env.DataBase)
     .then(() => console.log("Connected to MongoDB"))
