@@ -1,0 +1,66 @@
+// import React, { useEffect } from "react";
+// import { Navigate, Outlet, useNavigate } from "react-router-dom";
+// import {jwtDecode} from "jwt-decode";
+
+// function Prodect({role}) {
+//   const navigate = useNavigate();
+//   const token =  localStorage.getItem("authToken");
+
+//   useEffect(() => {
+//     // Check if token is missing and redirect to login
+//     if (!token) {
+
+//       navigate("/", {replace:true});
+//       console.log(window.location.pathname);
+//     } else {
+//       console.log(window.location.pathname);
+
+//       // Prevent navigation back to the login page
+//       window.history.pushState(null, null, window.location.href);
+//       const handleBackButton = (event) => {
+//         event.preventDefault();
+//         window.history.pushState(null, null, window.location.href);
+//       };
+//       window.addEventListener("popstate", handleBackButton);
+
+//       return () => {
+//         window.removeEventListener("popstate", handleBackButton);
+//       };
+//     }
+//   }, [token, navigate]);
+//   console.log(window.location.pathname); 
+ 
+// //   const decoded = jwtDecode(token);
+//   return token !== null ? <Outlet /> : <Navigate to="/" />;
+// }
+
+// export default Prodect;    
+
+import { Navigate, Outlet, useLocation } from "react-router-dom";
+import {jwtDecode} from "jwt-decode";
+
+const Prodect = ({ allowedRole }) => {
+  const token = localStorage.getItem("authToken");
+  const location = useLocation();
+
+  // 🚀 If no token, redirect to "/"
+  if (!token) return <Navigate to="/" replace />;
+ 
+  try {
+    const decoded = jwtDecode(token);
+
+    // 🚀 If role doesn't match, clear token & redirect
+    if (decoded.role !== allowedRole) {
+      localStorage.removeItem("authToken");
+      return <Navigate to="/" replace />;
+    }
+
+    return <Outlet />;
+  } catch (error) {
+    // 🚀 If error decoding, clear token & redirect
+    localStorage.removeItem("authToken");
+    return <Navigate to="/" replace />;
+  }
+};
+
+export default Prodect;

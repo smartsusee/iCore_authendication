@@ -1,0 +1,147 @@
+/* General styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+#container {
+  background-color: rgb(77, 109, 176);
+  display: flex;
+  justify-content: center;
+
+}
+#div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 350px;
+  height: 100vh;
+}
+
+.container {
+  width: 350px;
+  position: relative;
+}
+
+/* Form Container */
+.form-container {
+  width: 100%;
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Form Box */
+.form-box {
+  position: relative;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Slide Animation */
+.animate-slide {
+  animation: slideIn 0.5s ease-in-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Input Fields */
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.input-group input:focus {
+  border-color: #764ba2;
+  outline: none;
+}
+
+/* Buttons */
+.btn {
+  width: 100%;
+  padding: 10px;
+  background: #764ba2;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #5b3a8a;
+}
+
+.toggle-btn {
+  display: block;
+  margin-top: 15px;
+  background: none;
+  border: none;
+  color: #764ba2;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.toggle-btn:hover {
+  color: #5b3a8a;
+}
+
+/* Toggle Effect */
+.register-active .form-box {
+  transform: translateY(-20px);
+  transition: 0.8s;
+}
+
+
+
+.password-container {
+  position: relative;
+  width: 100%;
+}
+
+.password-container input {
+  width: 100%;
+  padding: 10px;
+  padding-right: 40px; /* Space for eye icon */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #666;
+}
