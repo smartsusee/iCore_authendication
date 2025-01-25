@@ -7,7 +7,14 @@
 }
 
 #container {
-  background-color: rgb(77, 109, 176);
+  /* background-color: rgb(77, 109, 176); */
+   background-image: url(https://img.freepik.com/premium-vector/global-technology-with-gear-backgroundvector-background_29113-178.jpg?semt=ais_hybrid);
+  /* background-image: url(https://img.freepik.com/free-vector/messy-table-top-view-evening_107791-26394.jpg?semt=ais_hybrid); */
+  /* background-image: url(https://img.freepik.com/free-vector/plain-background-with-woman-pink-jacket_1308-44121.jpg?semt=ais_hybrid); */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
   display: flex;
   justify-content: center;
 

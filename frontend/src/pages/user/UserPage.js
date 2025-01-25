@@ -53,7 +53,7 @@ function User() {
     <div id="bodyData">
        <div id="nav">
        <div className="">
-        <h4>Welcome to the Main Page</h4>
+        <h4>Welcome to the user Page</h4>
       </div>
       <div>
       <button onClick={handleLogout}>Logout</button>

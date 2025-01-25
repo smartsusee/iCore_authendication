@@ -2,8 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode'; // 🚀 Decode JWT
 import { AuthAxios } from '../../Base/BaseUrl/interceptor/AuthAxios';
+import { FaBars, FaUser, FaInfoCircle, FaServicestack, FaEnvelope } from "react-icons/fa";
 
 const ReadData = () => {
+   const [isOpen, setIsOpen] = useState(false);
+  
+    const toggleSidebar = () => {
+      setIsOpen(!isOpen);
+    };
   const navigate = useNavigate();
   const tokens = JSON.parse(localStorage.getItem('authToken'));
   const decodedToken = jwtDecode(tokens);
@@ -50,16 +56,65 @@ const ReadData = () => {
   };
 
   return (
-    <div>
-      <h2>Admin Page</h2>
-      <button onClick={handleLogout}>Logout</button>
-      <div>
+    // <div>
+    //   <h2>Admin Page</h2>
+    //   <button onClick={handleLogout}>Logout</button>
+    
+    // </div>
+    <div style={{display: "flex", flexDirection: "row"}}>
+       
+        <div className={`sidebar-container ${isOpen ? "open" : "closed"}`}>
+        {/* Sidebar */}
+        <div className="sidebar">
+          <div className="toggle-container">
+            <FaBars className="toggle-icon" onClick={toggleSidebar} />
+          </div>
+          <ul className="menu-items">
+            <li>
+              <FaUser className="menu-icon" />&nbsp;
+              {isOpen && <span>User</span>}
+            </li>
+            <li>
+              <FaInfoCircle className="menu-icon" />
+              {isOpen && <span>About</span>}
+            </li>
+            <li>
+              <FaServicestack className="menu-icon" />
+              {isOpen && <span>Services</span>}
+            </li>
+            <li>
+              <FaEnvelope className="menu-icon" />
+              {isOpen && <span>Contact</span>}
+            </li>
+          </ul>
+        </div>
+      
+        {/* Main Content */}
+        
+        </div>
+      
+        <div id="bodyData">
+           <div id="nav">
+           <div className="">
+            <h4>Welcome to the admin Page</h4>
+          </div>
+          <div>
+          <button onClick={handleLogout}>Logout</button>
+    
+          </div>
+           </div>
+           <div id="FormData">
+           <div>
         {/* Render your data here */}
         {data.map(item => (
           <div key={item.id}>{item.name}</div> // Replace 'id' and 'name' with your actual data properties
         ))}
       </div>
-    </div>
+           </div>
+        </div>
+       
+       
+        </div>
   );
 };
 
