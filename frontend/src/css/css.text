@@ -1,0 +1,200 @@
+ /* General Container */
+.sidebar-container {
+  display: flex;
+  height: 100vh;
+  transition: all 0.3s ease-in-out;
+  background: linear-gradient(120deg, #f3f4f7, #d4d9f5);
+}
+
+/* Sidebar Styling */
+.sidebar {
+  background: linear-gradient(180deg, #27293d, #4a4e69);
+  color: white;
+  height: 100%;
+  transition: width 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+  width: 200px;
+}
+
+.sidebar.closed {
+  width: 50px;
+}
+
+.toggle-container {
+  display: flex;
+  justify-content: end;
+  width: 100%;
+  padding: 10px 20px;
+}
+
+.toggle-icon {
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: white;
+  transform: rotate(0deg);
+  transition: transform 0.3s ease;
+}
+
+.sidebar.closed .toggle-icon {
+  transform: rotate(180deg);
+}
+
+/* Menu Items */
+.menu-items {
+  list-style-type: none;
+  padding: 0;
+  margin: 30px 0;
+  width: 100%;
+}
+
+.menu-items li {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 20px 0;
+  padding: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: linear-gradient(90deg, #33354e, #505274);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.menu-items li:hover {
+  background: linear-gradient(90deg, #4a4e69, #27293d);
+  transform: translateX(10px);
+}
+
+.menu-icon {
+  font-size: 1.5rem;
+  margin-right: 15px;
+}
+
+.sidebar.closed .menu-icon {
+  margin-right: 0;
+  justify-content: center;
+}
+
+.sidebar.closed li span {
+  display: block;
+}
+
+/* Main Content */
+.content {
+  flex: 1;
+  padding: 20px;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.sidebar-container .open {
+  margin-left: 200px;
+}
+
+.sidebar-container .closed {
+  margin-left: 50px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sidebar-container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+
+  .sidebar.closed {
+    width: 50px;
+  }
+}
+
+#bodyData {
+  width: 100%;
+  background: linear-gradient(135deg, #fdfbfb, #ebedee);
+  display: flex;
+  flex-direction: column;
+}
+
+#nav {
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: linear-gradient(45deg, #2d2d54, #4e4e9e);
+  color: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#nav h4 {
+  font-family: "Arial", sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 0.05rem;
+  margin: 0;
+}
+
+#nav button {
+  background: linear-gradient(90deg, #ef476f, #ff9a8b);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-family: "Roboto", sans-serif;
+}
+
+#nav button:hover {
+  background: linear-gradient(90deg, #ff6f91, #ef476f);
+}
+
+#FormData {
+  width: 100%;
+  background: linear-gradient(120deg, #f6d365, #fda085);
+  height: calc(100% - 60px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  color: #333;
+  font-size: 1.2rem;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+https://codepen.io/leonam-silva-de-souza/pen/MYgoVMV
+
+  <Accordion defaultActiveKey="0" className="custom-accordion">
+        <Accordion.Item eventKey="0">
+          <Accordion.Header style={{border:"none"}}>Accordion Item #1</Accordion.Header>
+          <Accordion.Body>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+           
+          </Accordion.Body>
+        </Accordion.Item>
+        <Accordion.Item eventKey="1">
+          <Accordion.Header style={{border:"none"}}>Accordion Item #2</Accordion.Header>
+          <Accordion.Body>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+            
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
