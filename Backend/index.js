@@ -19,6 +19,16 @@ Mongoose.connect(process.env.DataBase)
     .catch((err) => console.log(err));
 
 
+
+    Mongoose
+    .connect(process.env.DataBase, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(async () => {
+        await createDefaultAdmin(); // Ensure admin user exists on server startup
+        console.log("DB is connect")
+    })
+    .catch((err) => console.error("Database connection failed:", err));
+
+
 // Middleware to verify token
 function VerifyToken(req, res, next) {
     const token = req.headers["authorization"];
@@ -39,28 +49,52 @@ function VerifyToken(req, res, next) {
 }
 
 
+// Call the function to ensure admin creation on server start
+
 // Route to create new user data
-App.post("/postdata", async (req, res) => {
-    const hashedPassword = await Bcrypt.hash(req.body.password, 10);
-    const emailExists = await Schema_Page.findOne({ email: req.body.email });
-    if (emailExists) {
-        return res.status(409).send("Email already exists");
+
+const createDefaultAdmin = async () => {
+    const adminExists = await Schema_Page.findOne({ email: process.env.Email });
+    if (!adminExists) {
+        const hashedPassword = await Bcrypt.hash(process.env.AdminPass, 10);
+        const adminUser = new Schema_Page({
+            name: process.env.Name,
+            email: process.env.Email,
+            password: hashedPassword,
+            role: process.env.Role,
+        });
+        await adminUser.save();
+        console.log("Default admin user created");
+    } else {
+        console.log("Admin user already exists");
     }
+};
 
+// POST /postdata route
+App.post("/postdata", async (req, res) => {
+    try {
+        // Hash the password
+        const hashedPassword = await Bcrypt.hash(req.body.password, 10);
+        // Check if the email already exists
+        const emailExists = await Schema_Page.findOne({ email: req.body.email });
+        if (emailExists) {
+            return res.status(409).send("Email already exists");
+        }
 
-    const Post_data = new Schema_Page({
-        name: req.body.name,
-        email: req.body.email,
-        password: hashedPassword,
-        role: req.body.role, // Optional, defaults to "user" in the schema
-    });
+        // Save the new user data
+        const Post_data = new Schema_Page({
+            name: req.body.name,
+            email: req.body.email,
+            password: hashedPassword,
+            role: req.body.role || "user", // Default to "user" if no role provided
+        });
 
-
-    const savedData = await Post_data.save();
-    res.status(201).json({ savedData, msg: "Data is created" });
+        const savedData = await Post_data.save();
+        res.status(201).json({ savedData, msg: "Data is created" });
+    } catch (error) {
+        res.status(500).send("An error occurred: " + error.message);
+    }
 });
-
-
 // Route to fetch data (admin-only)
 App.get("/getdata", VerifyToken, async (req, res) => {
 
