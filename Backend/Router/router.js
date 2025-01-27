@@ -38,9 +38,19 @@ const upload = multer({
 // Create a new user with image upload
 router.post("/postdata", upload.single("image"), async (req, res) => {
     try {
-        const { firstname, lastname, role, dob, gender, email, mobile, city, state } = req.body;
-        const imagePath = req.file ? req.file.path : null;
 
+        const { firstname, lastname, role, dob, gender, email, mobile, city,state } = req.body;
+
+        // Check if the email already exists before proceeding
+        const emailExists = await User.findOne({ email });
+
+        if (emailExists) {
+            return res.status(409).send("Email already exists. No new data stored.");
+        }
+
+        const imagePath = req.file ? req.file.path : null; // Get the image path if provided, else null
+
+        // Create a new user object to be saved
         const user = new User({
             firstname,
             lastname,
@@ -53,13 +63,9 @@ router.post("/postdata", upload.single("image"), async (req, res) => {
             state,
             image: imagePath
         });
- 
- const emailExists = await User.findOne({ email: req.body.email });
-    if (emailExists) {
-        return res.status(409).send("Email already exists");
-    }
-        const savedUser = await user.save();
-        res.status(201).json(savedUser);
+
+        const savedUser = await user.save(); // Save the new user only if email doesn't exist
+        res.status(201).json({savedUser, msg:"data create successfully"}); // Send back the saved user
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
