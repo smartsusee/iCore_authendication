@@ -8,6 +8,7 @@ import ReadData from './components/Prodect/ReadData';
 import User from './pages/user/UserPage';
 import { ToastContainer } from 'react-toastify';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import RegisterData from './components/Prodect/RegisterData';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,6 +21,8 @@ root.render(
         {/* Admin Protected Route */}
         <Route element={<Prodect allowedRole="admin" />}>
           <Route path="/admin" element={<ReadData />} />
+          <Route path="/Reg" element={<RegisterData />} />
+
         </Route>
 
         {/* User Protected Route */}

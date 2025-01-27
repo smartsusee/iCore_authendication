@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode'; // 🚀 Decode JWT
 import { FaBars, FaUser, FaInfoCircle, FaServicestack, FaEnvelope } from "react-icons/fa";
-import { AuthAxios } from '../../Base/BaseUrl/interceptor/AuthAxios';
+import { AuthAxios, UserAxios } from '../../Base/BaseUrl/interceptor/AuthAxios';
 import Table from 'react-bootstrap/Table';
 import "../../css/ReadData.css"
-const ReadData = () => {
+import { FaTrashAlt } from "react-icons/fa";
+import { Bounce, toast } from 'react-toastify';
+const RegisterData = () => {
    const [isOpen, setIsOpen] = useState(false);
   
     const toggleSidebar = () => {
@@ -18,31 +20,31 @@ const ReadData = () => {
   console.log(decodedToken.role);
 
   const [data, setData] = useState([]);
+  const [toogle , setToogle] = useState(false)
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1); // Track current page
   const rowsPerPage = 3; // Number of records per page
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (decodedToken.role !== 'admin') {
-          throw new Error('Only admins can access this route');
-        }
 
-        const response = await AuthAxios.get('/getdata', {
-          headers: {
-            'Authorization': `Bearer ${tokens}`
-          }
-        });
-        console.log(response.data);
+function fetchData() {
+    
+    UserAxios.get("getData").then((res)=>{
+        console.log(res.data);
+        setData(res.data)
         
-        setData(response.data.Get_data);
-      } catch (error) {
-        setError(error.message);
-      }
-    };
+    }).catch((err)=>{
 
-    fetchData();
-  }, []); // Empty dependency array means this effect runs once on mount
+          console.log(err);
+          
+
+    })
+}
+
+
+  useEffect(() => {
+    fetchData()
+
+  
+  }, [toogle]); // Empty dependency array means this effect runs once on mount
 
   if (error) {
     return <div>Error: {error}</div>;
@@ -69,6 +71,21 @@ const ReadData = () => {
     localStorage.removeItem('authToken'); // Remove token
     navigate('/', { replace: true }); // Redirect to login
   };
+
+  const deleteFun =(id)=>{
+
+     console.log(id);
+     UserAxios.delete(`DeleteData/${id}`).then((res)=>{
+      console.log(res.data.message);
+      toast.success(res.data.message, { transition: Bounce });
+
+      setToogle(!toogle)
+     }).catch((err)=>{
+      console.log(err);
+     })
+     
+
+  }
 
   return (
     <>
@@ -98,7 +115,7 @@ const ReadData = () => {
                   </div>
                   <div className="user-info">
                     <span className="user-name">
-                       <strong> Susee</strong>
+                       <strong>Susee</strong>
                     </span>
                     <span className="user-role">Administrator</span>
                     <span className="user-status">
@@ -125,8 +142,8 @@ const ReadData = () => {
                             <label for="section1" className="accordion-header" style={{ border: "none", textAlign: "center", fontSize: "15px" }}>
                               Section 1
                             </label>
-                            <div className="accordion-content" onClick={()=>{navigate("/reg")}} >
-                              Userdata View  
+                            <div className="accordion-content"  onClick={()=>{navigate("/reg")}}>
+                             Userdata View
                             </div>
                           </div>
                           <div className="accordion-item" style={{ border: "none", textAlign: "center" }}>
@@ -162,27 +179,59 @@ const ReadData = () => {
             </nav>
             <div className="page-content">
           <div className="container-fluid">
-            <Table striped bordered hover>
+            <Table striped bordered hover style={{textAlign:"center"}}>
               <thead>
                 <tr>
-                  <th>S.No</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Username</th>
+                  <th id='th' >S.No</th>
+                  <th id='th' >First Name</th>
+                  <th id='th' >Last Name</th>
+                  <th id='th' >dob</th>
+                  <th id='th' >gender</th>
+                  <th id='th' >email</th>
+                  <th id='th' >city</th>
+                  <th id='th' >state</th>
+                  <th id='th' >User_Image</th>
+                  <th id='th' >Actions</th>
+
+
+                  
+
                 </tr>
               </thead>
               <tbody>
-                {currentData
-                  .filter((item) => item.name !== "admin")
-                  .map((item, index) => (
-                    <tr key={item.id} className="fade-in">
-                      <td>{indexOfFirstRow + index + 1}</td>
-                      <td>{item.name}</td>
-                      <td>{item.email}</td>
-                      <td>{item.role}</td>
-                    </tr>
-                  ))}
-              </tbody>
+  {currentData
+    .filter((item) => item.name !== "admin")
+    .map((item, index) => {
+      const imageName = item.image
+        ? item.image.replace('R:\\ApiIntegrate\\frontend\\src\\images\\', '')
+        : 'No Image';
+
+      return (
+        <tr key={item.id} className="fade-in">
+          <td data-label="S.No">{indexOfFirstRow + index + 1}</td>
+          <td data-label="First Name">{item.firstname}</td>
+          <td data-label="Last Name">{item.lastname}</td>
+          <td data-label="DOB">{item.role}</td>
+          <td data-label="Gender">{item.gender}</td>
+          <td data-label="Email">{item.email}</td>
+          <td data-label="City">{item.city}</td>
+          <td data-label="State">{item.state}</td>
+          <td data-label="User Image">
+            <img
+              id="img"
+              src={require(`../../images/${imageName}`)}
+              alt={imageName}
+            />
+          </td>
+          <td data-label="Actions">
+            <span>edit</span> &nbsp; <span onClick={()=>{deleteFun(item._id)}}><FaTrashAlt /></span>
+          </td>
+        </tr>
+      );
+    })}
+</tbody>
+
+
             </Table>
 
             {/* Pagination */}
@@ -215,4 +264,4 @@ const ReadData = () => {
   );
 };
 
-export default ReadData;
+export default RegisterData;

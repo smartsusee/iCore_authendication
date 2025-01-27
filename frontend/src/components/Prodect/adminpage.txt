@@ -1,3 +1,223 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "../../css/UserPage.css";
+import Accordion from "react-bootstrap/Accordion";
+import {
+  FaBars,
+  FaTimes,
+  FaUser,
+  FaInfoCircle,
+  FaServicestack,
+  FaEnvelope,
+} from "react-icons/fa";
+
+function User() {
+  const [isOpen, setIsOpen] = useState(true);
+
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("authToken"); // Remove token
+    navigate("/", { replace: true }); // Redirect to login
+  };
+
+  return (
+    <>
+      <div className={`page-wrapper chiller-theme ${isOpen ? "toggled" : ""}`}>
+        <button
+          id="show-sidebar"
+          className="btn btn-sm btn-dark"
+          onClick={toggleSidebar}
+        >
+          <FaBars />
+        </button>
+        <nav id="sidebar" className="sidebar-wrapper">
+          <div className="sidebar-content">
+            <div className="sidebar-brand">
+              <a href="#">Admin</a>
+              <i id="close-sidebar" class="fas fa-times" onClick={toggleSidebar}></i>
+
+            </div>
+            <div className="sidebar-header">
+              <div className="user-pic">
+                <img
+                  className="img-responsive img-rounded"
+                  src={require("./profile.jpg")}
+                  alt="User"
+                />
+              </div>
+              <div className="user-info">
+                <span className="user-name">
+                  Susee <strong>Smith</strong>
+                </span>
+                <span className="user-role">Administrator</span>
+                <span className="user-status">
+                  <i className="fa fa-circle"></i>
+                  <span>Online</span>
+                </span>
+              </div>
+            </div>
+            <div className="sidebar-menu">
+              <ul>
+                <li className="header-menu">
+                  <span>General</span>
+                </li>
+                <li className="sidebar-dropdown">
+                  <a href="#">
+                    <i className="fa fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                    <span className="badge badge-pill badge-warning">New</span>
+                  </a>
+                  <div className="custom-accordion-container" style={{ border: "none" }}>
+  <div className="accordion" style={{ border: "none"}}>
+    <div className="accordion-item" style={{ border: "none",}}>
+      <input type="checkbox" id="section1" style={{ border: "none", outline: "none" }} />
+      <label for="section1" className="accordion-header" style={{ border: "none" ,textAlign:"center", fontSize:"15px"}}>
+        Section 1
+      </label>
+      <div className="accordion-content" style={{}}>
+        Content for Section .
+      </div>
+    </div>
+    <div className="accordion-item" style={{ border: "none",textAlign:"center"}}>
+      <input type="checkbox" id="section2" />
+      <label for="section2" className="accordion-header" style={{ border: "none", fontSize:"15px" }}>
+       <div id="demo" style={{display:"flex",justifyContent:"space-around"}}>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+
+       </div>
+      </label>
+      <div className="accordion-content" style={{}}>
+        Content for Section 2. 
+      </div>
+    </div>
+    <div className="accordion-item" style={{ border: "none",}}>
+      <input type="checkbox" id="section3" />
+      <label for="section3" className="accordion-header" style={{ border: "none" ,textAlign:"center", fontSize:"15px"}}>
+        Section 3
+      </label>
+      <div className="accordion-content" style={{}}>
+        Content for Section 3. 
+      </div>
+    </div>
+  </div>
+</div>
+
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="sidebar-footer">
+            <a href="#">
+              <i className="fa fa-power-off"></i>
+            </a>
+          </div>
+        </nav>
+        <div className="page-content">
+          <div className="container-fluid">
+           
+            <div id="" style={{display:"flex", justifyContent:"space-around", alignItems:"center"}}>
+              <div> <h2>Admin</h2></div>
+               <div>demo</div>
+            </div>
+            <hr />
+            <div className="row">
+              <div className="col-md-12">
+                 <div id="formDatas">
+
+                 <div class="container">
+                 <div class="title">Registration</div>
+ 
+  <form action="">
+    <div class="user__details">
+      <div class="input__box">
+        <span class="details">Full Name</span>
+        <input type="text" placeholder="E.g: John Smith" required/>
+      </div>
+      <div class="input__box">
+        <span class="details">Username</span>
+        <input type="text" placeholder="johnWC98" required />
+      </div>
+      <div class="input__box">
+        <span class="details">Email</span>
+        <input type="email" placeholder="johnsmith@hotmail.com" required />
+      </div>
+      <div class="input__box">
+        <span class="details">Phone Number</span>
+        <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="012-345-6789" required />
+      </div>
+      <div class="input__box">
+        <span class="details">Password</span>
+        <input type="password" placeholder="********" required />
+      </div>
+      <div class="input__box">
+        <span class="details">Password</span>
+        <input type="password" placeholder="********" required />
+      </div>
+      <div class="input__box">
+        <span class="details">Password</span>
+        <input type="password" placeholder="********" required />
+      </div>
+      <div class="input__box">
+        <span class="details">Choose you'r state </span>
+       <select style={{width:"100%", height:"50px", borderRadius:"5px", border:"1px solid #ccc"}}>
+        <option value="" key="">choose you'State</option>
+        <option value="" key="">TamilNadu</option>
+        <option value="" key="">Andhra Pradesh</option>
+        <option value="" key="">Arunachal Pradesh</option>
+        <option value="" key="">Assam</option>
+        <option value="" key="">Bihar</option>
+        <option value="" key="">Goa</option>
+        <option value="" key="">choose you'r option</option>
+       </select>
+      </div>
+
+    </div>
+    <div class="gender__details">
+      <input type="radio" name="gender" id="dot-1" />
+      <input type="radio" name="gender" id="dot-2" />
+      <input type="radio" name="gender" id="dot-3" />
+      <span class="gender__title">Gender</span>
+      <div class="category">
+        <label for="dot-1">
+          <span class="dot one"></span>
+          <span>Male</span>
+        </label>
+        <label for="dot-2">
+          <span class="dot two"></span>
+          <span>Female</span>
+        </label>
+        <label for="dot-3">
+          <span class="dot three"></span>
+          <span>Prefer not to say</span>
+        </label>
+      </div>
+    </div>
+    <div class="button">
+      <input type="submit" value="Register" />
+    </div>
+  </form>
+</div>
+                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default User;
+
+
+Style : 
+
 
 
 @keyframes swing {
@@ -532,7 +752,6 @@ body {
   color: #b8bfce;
   padding: 15px 20px;
   cursor: pointer;
-  background-color: #2c3e51 !important;
   font-size: 18px;
   font-weight: bold;
   transition: background-color 0.3s ease;
@@ -559,182 +778,4 @@ input[type="checkbox"] {
 input[type="checkbox"]:checked ~ .accordion-content {
   max-height: 150px; /* Adjust based on your content */
   padding: 15px 20px;
-}
-
-
-
-
-/* _________ form css_________  */
-
-/* all */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-
-:root {
-  --main-blue: #71b7e6;
-  --main-purple: #9b59b6;
-  --main-grey: #ccc;
-  --sub-grey: #d9d9d9;
-}
-
-
-/* container and form */
-.container {
-  max-width: 700px;
-  width: 100%;
-  background: #fff;
-  padding: 25px 30px;
-  border-radius: 5px;
-}
-.container .title {
-  font-size: 25px;
-  font-weight: 500;
-  position: relative;
-}
-
-.container .title::before {
-  content: "";
-  position: absolute;
-  height: 3.5px;
-  width: 30px;
-  background: linear-gradient(135deg, var(--main-blue), var(--main-purple));
-  left: 0;
-  bottom: 0;
-}
-
-.container form .user__details {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 20px 0 12px 0;
-}
-/* inside the form user details */
-form .user__details .input__box {
-  width: calc(100% / 2 - 20px);
-  margin-bottom: 15px;
-}
-
-.user__details .input__box .details {
-  font-weight: 500;
-  margin-bottom: 5px;
-  display: block;
-}
-.user__details .input__box input {
-  height: 45px;
-  width: 80%;
-  outline: none;
-  border-radius: 5px;
-  border: 1px solid var(--main-grey);
-  padding-left: 15px;
-  font-size: 16px;
-  border-bottom-width: 2px;
-  transition: all 0.3s ease;
-}
-
-.user__details .input__box input:focus,
-.user__details .input__box input:valid {
-  border-color: var(--main-purple);
-}
-
-/* inside the form gender details */
-
-form .gender__details .gender__title {
-  font-size: 20px;
-  font-weight: 500;
-}
-
-form .gender__details .category {
-  display: flex;
-  width: 100%;
-  margin: 15px 0;
-  justify-content: space-between;
-}
-
-.gender__details .category label {
-  display: flex;
-  align-items: center;
-}
-
-.gender__details .category .dot {
-  height: 18px;
-  width: 18px;
-  background: var(--sub-grey);
-  border-radius: 50%;
-  margin: 10px;
-  border: 5px solid transparent;
-  transition: all 0.3s ease;
-}
-
-#dot-1:checked ~ .category .one,
-#dot-2:checked ~ .category .two,
-#dot-3:checked ~ .category .three {
-  border-color: var(--sub-grey);
-  background: var(--main-purple);
-}
-
-form input[type="radio"] {
-  display: none;
-}
-
-/* submit button */
-form .button {
-  height: 45px;
-  margin: 45px 0;
-}
-
-form .button input {
-  height: 100%;
-  width: 30%;
-  outline: none;
-  color: #fff;
-  border: none;
-  font-size: 18px;
-  font-weight: 500;
-  border-radius: 5px;
-  background: linear-gradient(135deg, var(--main-blue), var(--main-purple));
-  transition: all 0.3s ease;
-}
-
-form .button input:hover {
-  background: linear-gradient(-135deg, var(--main-blue), var(--main-purple));
-}
-
-@media only screen and (max-width: 584px) {
-  .container {
-    max-width: 100%;
-  }
-
-  form .user__details .input__box {
-    margin-bottom: 15px;
-    width: 100%;
-  }
-
-  form .gender__details .category {
-    width: 100%;
-  }
-
-  .container form .user__details {
-    max-height: 300px;
-    overflow-y: scroll;
-  }
-
-  .user__details::-webkit-scrollbar {
-    width: 0;
-  }
-}
-
-
-#formDatas{
-  display: flex;
-  justify-content: center;
-  width:100%;height:700px;border-radius: 10px; 
-  background: -webkit-linear-gradient(45deg ,rgb(83, 83, 104) , rgb(163, 163, 202));
-  padding: 10px;
-
 }

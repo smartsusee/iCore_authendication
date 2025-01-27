@@ -1,0 +1,126 @@
+/* Base table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  th, td {
+    padding: 10px;
+    text-align: center;
+    
+  }
+  
+  th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  td {
+    border: 1px solid #ddd;
+    font-size: 13px;
+
+  }
+  
+  #img {
+    max-width: 70px;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  .fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Pagination styles */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+  }
+  
+  .pagination-btn {
+    padding: 8px 12px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .pagination-btn:disabled {
+    background-color: #d6d6d6;
+    cursor: not-allowed;
+  }
+  
+  .pagination-info {
+    font-size: 14px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+      display: block;
+      width: 100%;
+    }
+  
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
+   
+  
+    tr {
+      margin-bottom: 15px;
+      display: flex;
+      flex-wrap: wrap;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 10px;
+    }
+  
+    th {
+      display: none;
+    }
+  
+    td {
+      flex: 1 1 50%;
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 10px;
+      text-align: left;
+      font-size: 10px !important;
+
+    }
+  
+    td::before {
+      content: attr(data-label);
+      font-weight: bold;
+      color: #333;
+      font-size: 10px !important;
+      margin-right: 10px;
+    }
+  
+    .pagination {
+      flex-direction: column;
+    }
+    img{
+        width: 50px;
+
+    }
+  }
+  

@@ -103,7 +103,7 @@ const App = () => {
   return (
     <div id="container">
       <div id="div">
-        <div className="container">
+        <div className="container" id="contai">
           <div className={`form-container ${isRegister ? "register-active" : ""}`}>
             <div className="form-box">
               <h2 className="text-center">{isRegister ? "Register" : "Login"}</h2>
