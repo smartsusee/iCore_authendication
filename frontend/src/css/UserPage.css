@@ -738,3 +738,33 @@ form .button input:hover {
   padding: 10px;
 
 }
+
+#dob { /* jsut to demonstrate that some styles will be copied from the input to the dropdowns*/
+  font: 1.2em sans-serif;
+  padding: 0.5em 1em;
+}
+
+/*
+Unfortunately, we have to fake placeholders as they are not supported on select elements
+*/
+input::placeholder,
+select.show-placeholder,
+select option:first-child {
+		color: #999;
+}
+
+select.show-placeholder option {
+		color: #000;
+}
+
+/* Display the dropdowns next to each other */
+#date-select-wrapper {
+  display: flex;
+  max-width: 300px; /* just for this demo */
+}
+
+#date-select-wrapper > * {
+		flex-grow: 1;
+		width: auto;
+		margin: 0;
+}

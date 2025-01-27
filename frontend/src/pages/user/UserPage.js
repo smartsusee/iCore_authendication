@@ -14,6 +14,8 @@ import { Bounce, toast } from "react-toastify";
 
 function User() {
 
+  const imgref = useRef(null);
+
   const [DetailsStore, SetDetailsStore] = useState({
 
     firstname: "",
@@ -29,7 +31,7 @@ function User() {
   })
 
 
-
+ 
 
   const [isOpen, setIsOpen] = useState(true);
   // const fileInputRef = useRef(null);
@@ -81,7 +83,7 @@ function User() {
         toast.success(response.data.msg, { transition: Bounce });
         SetDetailsStore({...DetailsStore, firstname:"", city:"", dob:"", email:"", gender:"", image:"" , lastname:"", mobile:"", state:""})
         // You can redirect or show a success message here
-        
+        imgref.current.value = "";
       })
       .catch((err) => {
         // Handle error
@@ -210,13 +212,13 @@ function User() {
                         
                         <div class="input__box">
                           <span class="details">DOB</span>
-                          <input type="date" required  name="dob"
+                          <input type="date" required  name="dob" id="dob"
                         value={DetailsStore.dob}
                         onChange={(e)=>{SetDetailsStore({...DetailsStore, dob:e.target.value})}}/>
                         </div>
                         <div class="input__box">
                           <span class="details">image</span>
-                          <input type="file"  name="image" onChange={handleFileChange} />
+                          <input type="file"  name="image" ref={imgref} onChange={handleFileChange} />
 
                         </div>
                         <div class="gender__details">
