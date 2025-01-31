@@ -122,31 +122,31 @@ const ReadData = () => {
                         <div className="accordion" style={{ border: "none" }}>
                           <div className="accordion-item" style={{ border: "none", }}>
                             <input type="checkbox" id="section1" style={{ border: "none", outline: "none" }} />
-                            <label for="section1" className="accordion-header" style={{ border: "none", textAlign: "center", fontSize: "15px" }}>
-                              Section 1
+                            <label for="section1" className="accordion-header"  style={{ border: "none", textAlign: "center", fontSize: "15px" }}>
+                            view User Details list
                             </label>
-                            <div className="accordion-content" onClick={()=>{navigate("/reg")}} >
+                            <div className="accordion-content"   id='detailsView'  onClick={()=>{navigate("/reg")}} >
                               Userdata View  
                             </div>
                           </div>
                           <div className="accordion-item" style={{ border: "none", textAlign: "center" }}>
                             <input type="checkbox" id="section2" />
                             <label for="section2" className="accordion-header" style={{ border: "none", fontSize: "15px" }}>
-                              section2
+                            Register page
                             </label>
-                            <div className="accordion-content">
-                              Content for Section 2.
+                            <div className="accordion-content"  id='detailsView' onClick={()=>{navigate("/admin")}}>
+                            Register list
                             </div>
                           </div>
-                          <div className="accordion-item" style={{ border: "none", }}>
+                          {/* <div className="accordion-item" style={{ border: "none", }}>
                             <input type="checkbox" id="section3" />
                             <label for="section3" className="accordion-header" style={{ border: "none", textAlign: "center", fontSize: "15px" }}>
                               Section 3
                             </label>
-                            <div className="accordion-content" >
+                            <div className="accordion-content"  id='detailsView' >
                               Content for Section 3.
                             </div>
-                          </div>
+                          </div> */}
                         </div>
                       </div>
     

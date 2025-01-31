@@ -147,19 +147,25 @@ function User() {
                       <div className="accordion-item" style={{ border: "none", }}>
                         <input type="checkbox" id="section1" style={{ border: "none", outline: "none" }} />
                         <label for="section1" className="accordion-header" style={{ border: "none", textAlign: "center", fontSize: "15px" }}>
-                          Section 1
+                          student entry
                         </label>
-                        <div className="accordion-content" >
-                          Content for Section .
+                        <div className="accordion-content" id='detailsView' >
+                         student details Register
                         </div>
                       </div>
                       <div className="accordion-item" style={{ border: "none", textAlign: "center" }}>
                         <input type="checkbox" id="section2" />
-                        <label for="section2" className="accordion-header" style={{ border: "none", fontSize: "15px" }}>
-                          section2
+                        <label for="section2" className="accordion-header" style={{ border: "none",  fontSize: "15px" }}>
+                          Billing
                         </label>
-                        <div className="accordion-content">
-                          Content for Section 2.
+                        <div className="accordion-content" id='detailsView'>
+                        Gst
+                        </div>
+                        <div className="accordion-content" id='detailsView'>
+                        Non-Gst
+                        </div>
+                        <div className="accordion-content" id='detailsView'>
+                        Invoice
                         </div>
                       </div>
                       <div className="accordion-item" style={{ border: "none", }}>
@@ -167,7 +173,7 @@ function User() {
                         <label for="section3" className="accordion-header" style={{ border: "none", textAlign: "center", fontSize: "15px" }}>
                           Section 3
                         </label>
-                        <div className="accordion-content" >
+                        <div className="accordion-content" id='detailsView' >
                           Content for Section 3.
                         </div>
                       </div>

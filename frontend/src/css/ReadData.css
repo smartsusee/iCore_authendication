@@ -124,3 +124,14 @@ table {
     }
   }
   
+
+  #detailsView {
+
+    color: #66b1cd;
+    text-align: center;
+     &:hover{
+      cursor: pointer;
+      background-color: #60696c;
+      color: #000000;
+     }
+  }
